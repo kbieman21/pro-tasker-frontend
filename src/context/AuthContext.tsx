@@ -29,7 +29,8 @@ export default function AuthProvider({ children }: AuthProviderProps) {
     },[] )
 
    const register = async (FormData: User) =>{
-    const res = await apiClient.post('/api/users/register', FormData);
+    // const res = await apiClient.post('/api/users/register', FormData);
+    await apiClient.post('/api/users/register', FormData);
 
     navigate('/login')
    }

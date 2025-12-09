@@ -4,6 +4,12 @@ export interface Project{
     _id:string
 }
 
+export interface Task{
+    title:string,
+    description:string,
+    _id:string
+}
+
 export interface User{
     username:string,
     email:string,
@@ -17,3 +23,9 @@ export interface AuthContextType {
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
 }
+
+export type ActionButtonProps = {
+  onClick: () => void;
+  label: string;
+  color?: "green" | "red" | "blue" | "gray";
+};
