@@ -1,16 +1,8 @@
-import axios from "axios";
 import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import type { User } from "../types";
+import type { AuthContextType, User } from "../types";
 import { apiClient } from "../clients/api";
 
-export interface AuthContextType {
-  isAuthenticated: boolean;
-  user: User;
-  register: (data: any) => Promise<void>;
-  login: (email: string, password: string) => Promise<void>;
-  logout: () => void;
-}
 
 interface AuthProviderProps {
   children: React.ReactNode;

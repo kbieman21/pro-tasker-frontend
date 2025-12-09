@@ -9,3 +9,11 @@ export interface User{
     email:string,
     password:string
 }
+
+export interface AuthContextType {
+  isAuthenticated: boolean;
+  user: User;
+  register: (data: any) => Promise<void>;
+  login: (email: string, password: string) => Promise<void>;
+  logout: () => void;
+}
