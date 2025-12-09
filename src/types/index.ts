@@ -3,3 +3,9 @@ export interface Project{
     description:string,
     _id:string
 }
+
+export interface User{
+    username:string,
+    email:string,
+    password:string
+}
