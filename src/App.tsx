@@ -7,6 +7,7 @@ import ProjectDetailsPage from "./pages/ProjectDetailsPage";
 import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
 import TaskPage from "./pages/TaskPage";
+import AuthenticatedRoute from "./components/AuthenticatedRoute";
 
 // console.log(import.meta.env.VITE_BACKEND_URL);
 
@@ -20,22 +21,29 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
 
-          {/* <Route path='/projects' element={
+          <Route path='/projects' element={
             <AuthenticatedRoute>
             <ProjectsPage/> 
             </AuthenticatedRoute>
           }
-          /> */}
-          <Route path="/projects" element={<ProjectsPage />} />
+          />
+          {/* <Route path="/projects" element={<ProjectsPage />} /> */}
 
-          {/* <Route path='/projects/:projectId' element={ 
+          <Route path='/projects/:projectId' element={ 
             <AuthenticatedRoute>
             <ProjectDetailsPage/>
             </AuthenticatedRoute>
           }
-          /> */}
-          <Route path="/projects/:projectId" element={<ProjectDetailsPage />} />
-          <Route path="/projects/:projectId/tasks/:taskId" element={<TaskPage />} />
+          />
+          {/* <Route path="/projects/:projectId" element={<ProjectDetailsPage />} /> */}
+
+          <Route path='/projects/:projectId/tasks/:taskId' element={ 
+            <AuthenticatedRoute>
+            <TaskPage/>
+            </AuthenticatedRoute>
+          }
+          />
+          {/* <Route path="/projects/:projectId/tasks/:taskId" element={<TaskPage />} /> */}
         </Routes>
       </div>
     </>

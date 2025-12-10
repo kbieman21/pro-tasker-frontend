@@ -12,6 +12,7 @@ function ProjectDetailsPage() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [status, setStatus] = useState("todo");
 
   const { projectId } = useParams();
 
@@ -60,9 +61,10 @@ function ProjectDetailsPage() {
       const res = await apiClient.post(`/api/projects/${projectId}/tasks`, {
         title,
         description,
+        status
       });
       setTasks((prev) => [...prev, res.data]);
-    } catch (error) {
+    } catch (error:any) {
       console.error(error);
       setError(error.message);
     } finally {
@@ -112,6 +114,16 @@ function ProjectDetailsPage() {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
+
+         <label htmlFor="task-description">Task Status</label>
+        <input
+          type="text"
+          name="task-status"
+          className="border"
+          value={status}
+          onChange={(e) => setStatus(e.target.value)}
+        />
+
         <input
           type="submit"
           value="Create Task"
@@ -122,11 +134,11 @@ function ProjectDetailsPage() {
         </button> */}
       </form>
 
-      <div>
+      {/* <div>
         <Link to="/projects" className="mt-auto bg-sky-500 rounded px-3 py-1">
           Back to Projects
         </Link>
-      </div>
+      </div> */}
 
     
       <div className="w-full flex gap-5 mt-10">
@@ -142,7 +154,7 @@ function ProjectDetailsPage() {
                 to={`/projects/${projectId}/tasks/${task._id}`}
                 className="mt-auto bg-sky-500 rounded"
               >
-                Back to Projects
+                See Task
               </Link>
             </div>
           ))}
