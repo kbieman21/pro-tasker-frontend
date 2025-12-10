@@ -33,9 +33,15 @@ function TaskPage() {
         setTitle(res.data.title);
         setDescription(res.data.description);
         setStatus(res.data.status);
-      } catch (err: any) {
-        console.log("Eror for getting task", err);
+      } catch (err) {
+        // console.log("Eror for getting task", err);
+        // setError(err.message);
+        console.error(error);
+      if (err instanceof Error) {
         setError(err.message);
+      } else {
+        setError("An unexpected error occurred");
+      }
       } finally {
         setLoading(false);
       }
@@ -60,7 +66,13 @@ function TaskPage() {
       setTask(res.data);
       alert("Task updated successfully!");
     } catch (err) {
-      console.error(err);
+      //console.error(err);
+      console.error(error);
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("An unexpected error occurred");
+      }
     }
   };
 
@@ -74,7 +86,13 @@ function TaskPage() {
       alert("Task deleted.");
       navigate(`/projects/${projectId}`);
     } catch (err) {
-      console.error(err);
+      //console.error(err);
+      console.error(error);
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("An unexpected error occurred");
+      }
     }
   };
 

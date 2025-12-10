@@ -33,8 +33,14 @@ function ProjectDetailsPage() {
         setName(res.data.name);
         setDescriptionP(res.data.description);
       } catch (error: any) {
-        console.log(error);
+        // console.log(error);
+        // setError(error.message);
+        console.error(error);
+      if (error instanceof Error) {
         setError(error.message);
+      } else {
+        setError("An unexpected error occurred");
+      }
       } finally {
         setLoading(false);
       }
@@ -52,7 +58,13 @@ function ProjectDetailsPage() {
         setTasks(res.data);
         // loading error
       } catch (error) {
-        console.error(error);
+       // console.error(error);
+       console.error(error);
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError("An unexpected error occurred");
+      }
       }
     };
     fetchProjectTasks();
@@ -72,9 +84,15 @@ function ProjectDetailsPage() {
         status,
       });
       setTasks((prev) => [...prev, res.data]);
-    } catch (error: any) {
+    } catch (error) {
+      // console.error(error);
+      // setError(error.message);
       console.error(error);
-      setError(error.message);
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError("An unexpected error occurred");
+      }
     } finally {
       setTitle("");
       setDescriptionT("");
@@ -92,7 +110,13 @@ function ProjectDetailsPage() {
       setProject(res.data);
       alert("Project updated successfully");
     } catch (error) {
-      console.error(error);
+     // console.error(error);
+     console.error(error);
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError("An unexpected error occurred");
+      }
     }
   };
 
@@ -105,7 +129,13 @@ function ProjectDetailsPage() {
       alert("Project deleted");
       //navigate("/projects");
     } catch (error) {
+      //console.error(error);
       console.error(error);
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError("An unexpected error occurred");
+      }
     }
   };
 

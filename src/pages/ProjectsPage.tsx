@@ -18,9 +18,15 @@ function ProjectsPage() {
         const res = await apiClient.get("/api/projects");
         console.log(res.data);
         setProjects(res.data);
-      } catch (error: any) {
-        console.log(error);
+      } catch (error) {
+        // console.log(error);
+        // setError(error.message);
+        console.error(error);
+      if (error instanceof Error) {
         setError(error.message);
+      } else {
+        setError("An unexpected error occurred");
+      }
       } finally {
         setLoading(false);
       }
@@ -38,9 +44,15 @@ function ProjectsPage() {
       setLoading(true);
       const res = await apiClient.post("/api/projects", { name, description });
       setProjects((prev) => [...prev, res.data]);
-    } catch (error:any) {
+    } catch (error) {
+      // console.error(error);
+      // setError(error.message);
       console.error(error);
-      setError(error.message);
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError("An unexpected error occurred");
+      }
     } finally {
       setLoading(false);
       setName("")
