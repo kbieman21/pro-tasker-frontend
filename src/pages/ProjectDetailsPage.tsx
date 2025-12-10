@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { apiClient } from "../clients/api";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import type { Project, Task } from "../types";
 import CommonButton from "../components/CommonButtons";
 
@@ -9,9 +9,12 @@ function ProjectDetailsPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  const [name, setName] = useState("");
+  const [descriptionP, setDescriptionP] = useState("");
+
   const [tasks, setTasks] = useState<Task[]>([]);
   const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [descriptionT, setDescriptionT] = useState("");
   const [status, setStatus] = useState("todo");
 
   const { projectId } = useParams();
@@ -24,6 +27,10 @@ function ProjectDetailsPage() {
         const res = await apiClient.get(`/api/projects/${projectId}`);
         console.log(res.data);
         setProject(res.data);
+
+        //populate fields
+        setName(res.data.name);
+        setDescriptionP(res.data.description);
       } catch (error: any) {
         console.log(error);
         setError(error.message);
@@ -60,42 +67,101 @@ function ProjectDetailsPage() {
     try {
       const res = await apiClient.post(`/api/projects/${projectId}/tasks`, {
         title,
-        description,
-        status
+        description: descriptionT,
+        status,
       });
       setTasks((prev) => [...prev, res.data]);
-    } catch (error:any) {
+    } catch (error: any) {
       console.error(error);
       setError(error.message);
     } finally {
       setTitle("");
-      setDescription("");
+      setDescriptionT("");
+      setStatus("")
     }
   };
 
-  const updateProject = async (e: React.FormEvent) => {};
+  const updateProject = async () => {
+    try {
+      const res = await apiClient.put(`/api/projects/${projectId}`, {
+        name,
+        descriptionP,
+      });
 
-  const deleteProject = async (e: React.FormEvent) => {};
+      setProject(res.data);
+      alert("Project updated successfully");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const deleteProject = async () => {
+    if (!confirm("Are you sure you want to delete this project?")) return;
+    try {
+      const res = await apiClient.delete(`/api/projects/${projectId}`);
+      console.log(res.data);
+
+      alert("Project deleted");
+      //navigate("/projects");
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className="text-white">
-      <h1 className="text-4xl">Project Details</h1>
+    
 
-      
+      {/* Project Form */}
+      <div className="text-white max-w-xl mx-auto mt-10 p-6 border rounded-lg shadow-lg">
+          <h1 className="text-4xl">Project Details</h1>
+        <div>
+          <label className="block text-gray-300 mb-1">Name</label>
+          <input
+            className="w-full p-2 rounded bg-gray-900 border border-gray-700 text-white"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </div>
 
-      <div className="mt-10">
+        <div>
+          <label className="block text-gray-300 mb-1">Description</label>
+          <textarea
+            className="w-full p-2 rounded bg-gray-900 border border-gray-700 text-white"
+            rows={3}
+            value={descriptionP}
+            onChange={(e) => setDescriptionP(e.target.value)}
+          ></textarea>
+        </div>
+
+        <div className="flex gap-3 my-4">
+          <CommonButton
+            label="Update Project"
+            color="blue"
+            onClick={updateProject}
+          />
+          <CommonButton
+            label="Delete Project"
+            color="red"
+            onClick={deleteProject}
+          />
+          <Link
+            to={`/projects`}
+            className="inline-block mb-4 px-4 py-2 bg-gray-700 rounded"
+          >
+            Back to Projects
+          </Link>
+        </div>
+      </div>
+
+      {/* <div className="mt-10">
         <div className="text-3xl font-semibold">{project?.name}</div>
         <div className="text-xl text-gray-300">{project?.description}</div>
-      </div>
-
-      <div className="flex gap-3 my-4">
-        <CommonButton label="Update" color="blue" onClick={() => {}} />
-        <CommonButton label="Delete" color="red" onClick={() => {}} />
-      </div>
+      </div> */}
 
       <form
         onSubmit={handleSubmit}
-        className="border p-2 h-50 mt-10 flex flex-col gap-2 rounded"
+        className=" p-2 h-50 mt-10 flex flex-col gap-2 rounded"
       >
         <label htmlFor="project-name">Task Title: </label>
         <input
@@ -111,11 +177,11 @@ function ProjectDetailsPage() {
           type="text"
           name="task-description"
           className="border"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
+          value={descriptionT}
+          onChange={(e) => setDescriptionT(e.target.value)}
         />
 
-         <label htmlFor="task-description">Task Status</label>
+        <label htmlFor="task-status">Task Status</label>
         <input
           type="text"
           name="task-status"
@@ -127,9 +193,9 @@ function ProjectDetailsPage() {
         <input
           type="submit"
           value="Create Task"
-          className="mt-auto bg-sky-500 rounded"
+          className="mt-5 bg-sky-500 rounded mb-5"
         />
-        {/* <button className="bg-sky-500 px-4 py-2 rounded w-full mt-2">
+        {/* <button className="bg-sky-500 px-4 py-2 rounded w-full mt-5 mb-5">
           Create Task
         </button> */}
       </form>
@@ -140,13 +206,12 @@ function ProjectDetailsPage() {
         </Link>
       </div> */}
 
-    
-      <div className="w-full flex gap-5 mt-10">
+      <div className="w-full flex gap-5 mt-5">
         {tasks &&
           tasks.map((task) => (
             <div
               key={task._id}
-              className="text-white w-50 flex flex-col h-50 border border-red-500 p-2 text-center rounded"
+               className="text-white w-50 flex flex-col h-50 border border-red-500 p-2 text-center rounded mt-5 mb-5"
             >
               <div className="font-bold">{task.title}</div>
               <div>{task.description}</div>

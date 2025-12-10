@@ -14,8 +14,9 @@ import AuthenticatedRoute from "./components/AuthenticatedRoute";
 function App() {
   return (
     <>
-      <div className="p-5 bg-zinc-900 h-screen">
-        <NavBar />
+     <NavBar />
+      <div className="min-h-screen flex flex-col justify-center bg-zinc-900 text-white">
+       
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/register" element={<RegisterPage />} />

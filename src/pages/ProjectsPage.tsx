@@ -53,7 +53,8 @@ function ProjectsPage() {
 
       <form
         onSubmit={handleSubmit}
-        className=" border p-2 h-50 mt-10 flex flex-col gap-2 rounded"
+        className="  p-2 h-50 mt-10 flex flex-col gap-2 rounded"
+        
       >
         <label htmlFor="project-name">Project Name: </label>
         <input
@@ -73,21 +74,24 @@ function ProjectsPage() {
           onChange={(e) => setDescription(e.target.value)}
         />
 
-        <input
+        {/* <input
           type="submit"
           value="Create Project"
-          className="mt-auto bg-sky-500 rounded"
-        />
+          className="mt-auto bg-sky-500 rounded mt-5"
+        /> */}
+         <button className="bg-sky-500 px-4 py-2 rounded w-full mt-5 mb-5">
+          Create Project
+        </button>
       </form>
 
       {error && <div>{error}</div>}
 
-      <div className="w-full flex gap-5 mt-10">
+      <div className="w-full flex gap-5 mt-5 mb-5">
         {projects &&
           projects.map((project) => (
             <div
               key={project._id}
-              className="text-white w-50 flex flex-col h-50 border border-red-500 p-2 text-center rounded"
+              className="text-white w-50 flex flex-col h-50 border border-red-500 p-2 text-center rounded mt-5 mb-5"
             >
               <div className="font-bold">{project.name}</div>
               <div>{project.description}</div>

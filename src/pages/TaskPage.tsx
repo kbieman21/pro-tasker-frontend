@@ -4,10 +4,7 @@ import type { Task } from "../types";
 import { apiClient } from "../clients/api";
 import CommonButton from "../components/CommonButtons";
 
-
 function TaskPage() {
-   
-    
   const { projectId, taskId } = useParams();
   const navigate = useNavigate();
 
@@ -22,7 +19,7 @@ function TaskPage() {
 
   useEffect(() => {
     const fetchTask = async () => {
-         console.log("Entering useEfect");
+      console.log("Entering useEfect");
       try {
         setLoading(true);
         const res = await apiClient.get(
@@ -31,14 +28,13 @@ function TaskPage() {
 
         setTask(res.data);
         console.log("TASKS FETCH", res.data);
-        
 
         // Populate form
         setTitle(res.data.title);
         setDescription(res.data.description);
         setStatus(res.data.status);
       } catch (err: any) {
-         console.log("Eror for getting task", err);
+        console.log("Eror for getting task", err);
         setError(err.message);
       } finally {
         setLoading(false);
@@ -85,14 +81,8 @@ function TaskPage() {
   return (
     <div className="text-white max-w-xl mx-auto mt-10 p-6 border rounded-lg shadow-lg">
       <h1 className="text-4xl font-bold mb-6">Task Details</h1>
-      <Link
-        to={`/projects/${projectId}`}
-        className="inline-block mb-4 px-4 py-2 bg-gray-700 rounded"
-      >
-        ← Back to Project
-      </Link>
 
-       {/* Task Form */}
+      {/* Task Form */}
       <div className="space-y-4">
         <div>
           <label className="block text-gray-300 mb-1">Title</label>
@@ -126,12 +116,26 @@ function TaskPage() {
           </select>
         </div>
 
-         {/* Buttons */}
+        {/* Buttons */}
         <div className="flex gap-4 mt-6">
-          <CommonButton label="Update Task" color="blue" onClick={handleUpdate} />
-          <CommonButton label="Delete Task" color="red" onClick={handleDelete} />
+          <CommonButton
+            label="Update Task"
+            color="blue"
+            onClick={handleUpdate}
+          />
+          <CommonButton
+            label="Delete Task"
+            color="red"
+            onClick={handleDelete}
+          />
+          <Link
+            to={`/projects/${projectId}`}
+            className="inline-block mb-4 px-4 py-2 bg-gray-700 rounded"
+          >
+            Back to Project
+          </Link>
         </div>
-       </div> 
+      </div>
     </div>
   );
 }

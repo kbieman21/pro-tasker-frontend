@@ -2,11 +2,11 @@ import { Link } from "react-router-dom";
 
 function HomePage() {
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center bg-gray-900 text-white">
+    <div>
       <h1 className="text-5xl font-bold mb-4">Project Manager App</h1>
 
       <p className="text-gray-300 text-lg mb-8">
-        Organize your projects and tasks with ease.
+        Organize your projects and tasks with ease. New users please register; or login if you have an account.
       </p>
 
      <div className="space-x-4">

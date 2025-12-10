@@ -5,8 +5,9 @@ import { AuthContext } from "../context/AuthContext";
 function NavBar() {
   const { logout, isAuthenticated } = useContext(AuthContext);
   return (
-    <nav className="text-white flex justify-between w-full">
+    <nav className="text-white flex justify-between w-full bg-zinc-900">
       <NavLink to="/">Home</NavLink>
+      
       <NavLink to="/projects">Projects</NavLink>
       {/* <NavLink to='/register'>Register</NavLink>*/}
      
