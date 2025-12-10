@@ -15,7 +15,8 @@ function RegisterPage() {
   };
 
   return (
-    <div>
+    <div className="min-h-screen flex items-center justify-center bg-gray-900">
+      <div>
       <h2 className="text-3xl mb-6 font-bold">Create an Account</h2>
 
       <form className="w-80 space-y-4" onSubmit={handleSubmit}>
@@ -27,6 +28,7 @@ function RegisterPage() {
           Register
         </button>
       </form>
+      </div>
     </div>
   );
 }

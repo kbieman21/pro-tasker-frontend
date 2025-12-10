@@ -18,6 +18,7 @@ function ProjectDetailsPage() {
   const [status, setStatus] = useState("todo");
 
   const { projectId } = useParams();
+  const navigate = useNavigate();
 
   // fetching project info
   useEffect(() => {
@@ -77,7 +78,7 @@ function ProjectDetailsPage() {
     } finally {
       setTitle("");
       setDescriptionT("");
-      setStatus("")
+      setStatus("todo");
     }
   };
 
@@ -110,11 +111,9 @@ function ProjectDetailsPage() {
 
   return (
     <div className="text-white">
-    
-
       {/* Project Form */}
       <div className="text-white max-w-xl mx-auto mt-10 p-6 border rounded-lg shadow-lg">
-          <h1 className="text-4xl">Project Details</h1>
+        <h1 className="text-4xl">Project Details</h1>
         <div>
           <label className="block text-gray-300 mb-1">Name</label>
           <input
@@ -145,12 +144,11 @@ function ProjectDetailsPage() {
             color="red"
             onClick={deleteProject}
           />
-          <Link
-            to={`/projects`}
-            className="inline-block mb-4 px-4 py-2 bg-gray-700 rounded"
-          >
-            Back to Projects
-          </Link>
+          <CommonButton
+            label="Back to Projects"
+            color="gray"
+            onClick={() => navigate("/projects")}
+          />
         </div>
       </div>
 
@@ -211,7 +209,7 @@ function ProjectDetailsPage() {
           tasks.map((task) => (
             <div
               key={task._id}
-               className="text-white w-50 flex flex-col h-50 border border-red-500 p-2 text-center rounded mt-5 mb-5"
+              className="text-white w-50 flex flex-col h-50 border border-red-500 p-2 text-center rounded mt-5 mb-5"
             >
               <div className="font-bold">{task.title}</div>
               <div>{task.description}</div>

@@ -128,12 +128,12 @@ function TaskPage() {
             color="red"
             onClick={handleDelete}
           />
-          <Link
-            to={`/projects/${projectId}`}
-            className="inline-block mb-4 px-4 py-2 bg-gray-700 rounded"
-          >
-            Back to Project
-          </Link>
+          
+           <CommonButton
+            label="Back to Project"
+            color="gray"
+            onClick={() => navigate(`/projects/${projectId}`)}
+          />
         </div>
       </div>
     </div>

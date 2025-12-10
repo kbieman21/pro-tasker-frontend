@@ -1,6 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import CommonButton from "../components/CommonButtons";
 
 function HomePage() {
+  const navigate = useNavigate();
   return (
     <div>
       <h1 className="text-5xl font-bold mb-4">Project Manager App</h1>
@@ -16,6 +18,8 @@ function HomePage() {
         >
           Login
         </Link>
+        
+        
 
         <Link 
           to="/register" 
