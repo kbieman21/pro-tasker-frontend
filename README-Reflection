@@ -1,0 +1,102 @@
+Pro-Tasker — Project & Task Manager
+
+A full-stack project manager application built with React + TypeScript, providing users with a clean, interactive way to manage their projects and tasks.
+
+Pro-Tasker includes both frontend and backend code (this repo contains the frontend).
+
+ Project Overview
+
+Pro-Tasker allows users to:
+ User Management
+	• Create an account and log in.
+	• Maintain a secure session.
+	• Log out safely.
+ Project Management
+	• Create new projects with a name and description.
+	• View a dashboard of all projects.
+	• Open the details of a single project.
+	• Update or delete only the projects they     own.
+ Task Management
+ Inside each project, users can:
+	• Create tasks with a title, description, and status (To Do, In Progress, Done).
+	• View all tasks belonging to a project.
+	• Update task details or change their status.
+	• Delete tasks from projects they own.
+
+ What This Project Demonstrates
+	• API integration (frontend + backend communication)
+	• Global state management with Context API
+	• Routing with React Router 
+	• Clean, reusable component architecture
+	• Responsive UI using Tailwind CSS
+	• Authentication & protected routes
+
+ Features
+ Home Page
+	• Friendly message
+	• Buttons for Register/Login
+	• Navigation to authentication pages
+ Register Page
+	• Account creation form (username, email, password)
+	• Submit button + navigation to Login page
+ Login Page
+	• Email + password form
+	• Sets user authentication state (see the context)
+ Projects Dashboard
+	• List of all user-owned projects
+	• Button to add a new project
+ Project Details Page
+	• View project title & description
+	• Update or delete project
+	• Create tasks
+	• View all associated tasks
+
+ Tech Stack
+Frontend
+	• React + TypeScript
+	• Vite (build tool)
+	• Tailwind CSS (styling)
+	• React Router (routing)
+	• Context API (global state management)
+	• Axios (API requests)
+	• npm (package manager)
+
+Backend (API used by this frontend)
+This frontend interacts with endpoints for:
+	1. Create a user
+	2. Log in a user
+	3. Create a project
+	4. Get all projects
+	5. Get a single project
+	6. Update a project
+	7. Delete a project
+	8. Create a task
+	9. Get all tasks
+	10. Get a single task
+	11. Update a task
+	12. Delete a task
+
+ Installation
+git clone https://github.com/kbieman21/pro-tasker-frontend
+cd pro-tasker-frontend
+npm install
+
+ Running Locally
+npm run dev
+Open the app in your browser:
+ http://localhost:5173
+ 
+ Deployment
+Frontend (Netlify)
+This frontend applicatio is deployed on Netlify and accessible here:
+https://protasker-frontend.netlify.app
+
+Backend (Render)
+The frontend communicates with the backend API hosted on Render:
+Backend API Base URL:
+https://pro-tasker-backend-61bs.onrender.com
+Make sure your .env contains:
+VITE_BACKEND_URL=https://pro-tasker-backend-61bs.onrender.com
+
+
+
