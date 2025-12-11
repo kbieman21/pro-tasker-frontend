@@ -190,7 +190,7 @@ function ProjectDetailsPage() {
 
       <form
         onSubmit={handleSubmit}
-        className=" p-2 h-50 mt-10 flex flex-col gap-2 rounded"
+        className=" p-2 h-50 mt-10 flex flex-col gap-2 rounded mb-10"
       >
         <label htmlFor="project-name">Task Title: </label>
         <input
@@ -219,14 +219,14 @@ function ProjectDetailsPage() {
           onChange={(e) => setStatus(e.target.value)}
         />
 
-        <input
+        {/* <input
           type="submit"
           value="Create Task"
           className="mt-5 bg-sky-500 rounded mb-5"
-        />
-        {/* <button className="bg-sky-500 px-4 py-2 rounded w-full mt-5 mb-5">
+        /> */}
+        <button className="bg-sky-500 px-4 py-2 rounded w-full mt-5 mb-5">
           Create Task
-        </button> */}
+        </button>
       </form>
 
       {/* <div>
@@ -235,12 +235,12 @@ function ProjectDetailsPage() {
         </Link>
       </div> */}
 
-      <div className="w-full flex gap-5 mt-5">
+      <div className="w-full flex gap-5">
         {tasks &&
           tasks.map((task) => (
             <div
               key={task._id}
-              className="text-white w-50 flex flex-col h-50 border border-red-500 p-2 text-center rounded mt-5 mb-5"
+              className="text-white w-50 flex flex-col h-50 border border-red-500 p-2 text-center rounded mt-15 mb-5"
             >
               <div className="font-bold">{task.title}</div>
               <div>{task.description}</div>

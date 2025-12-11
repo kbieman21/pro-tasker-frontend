@@ -99,4 +99,8 @@ Make sure your .env contains:
 VITE_BACKEND_URL=https://pro-tasker-backend-61bs.onrender.com
 
 
+TODOs
+If I had more time I would make my application more responsive.
+
+
 
